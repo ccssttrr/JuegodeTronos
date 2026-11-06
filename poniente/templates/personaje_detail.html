@@ -1,11 +1,5 @@
 {% extends "seccion.html" %}
 
-{% block contenido %}
-<h1>{{ personaje.nombre }}</h1>
-<p>Casa: <a href="{% url 'casa' personaje.casa.pk %}">{{ personaje.casa.nombre }}</a></p>
-<p>Temporadas: {{ personaje.temporadas.all|length }}</p>
-<p><a href="{% url 'casa' personaje.casa.pk %}">Volver a la casa</a></p>
-{% endblock %}
 {% block title %}{{ personaje.nombre }} · Juego de Tronos{% endblock %}
 
 {% block content %}
