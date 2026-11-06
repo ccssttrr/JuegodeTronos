@@ -1,0 +1,23 @@
+{% extends "seccion.html" %}
+
+{% block title %}Personajes · Juego de Tronos{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Personajes</h2>
+    {% if personajes %}
+        <div class="tarjetas">
+        {% for personaje in personajes %}
+            <article class="tarjeta">
+                <h3>{{ personaje.nombre }}</h3>
+                <p class="etiqueta">{{ personaje.casa.nombre }}</p>
+                <p>{{ personaje.descripcion|truncatewords:20 }}</p>
+                <a href="{% url 'personaje_detail' personaje.pk %}">Ver ficha</a>
+            </article>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>Todavía no hay personajes.</p>
+    {% endif %}
+</section>
+{% endblock %}

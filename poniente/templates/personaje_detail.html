@@ -1,0 +1,27 @@
+{% extends "seccion.html" %}
+
+{% block title %}{{ personaje.nombre }} · Juego de Tronos{% endblock %}
+
+{% block content %}
+<article>
+    <h2>{{ personaje.nombre }}</h2>
+    <p>{{ personaje.descripcion }}</p>
+
+    <h3>Casa</h3>
+    <p>{{ personaje.casa.nombre }}</p>
+
+    <h3>Aparece en</h3>
+    {% if temporadas %}
+        <ul>
+        {% for temporada in temporadas %}
+            <li>
+                <a href="{% url 'temporada_detail' temporada.pk %}">Temporada {{ temporada.numero }}</a>
+                <span class="etiqueta">{{ temporada.anio }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No aparece en ninguna temporada.</p>
+    {% endif %}
+</article>
+{% endblock %}

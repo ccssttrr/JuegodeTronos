@@ -1,0 +1,21 @@
+{% extends "seccion.html" %}
+
+{% block title %}Temporadas · Juego de Tronos{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Temporadas</h2>
+    {% if temporadas %}
+        <ul>
+        {% for temporada in temporadas %}
+            <li>
+                <a href="{% url 'temporada_detail' temporada.pk %}">Temporada {{ temporada.numero }}</a>
+                <span class="etiqueta">{{ temporada.anio }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Todavía no hay temporadas.</p>
+    {% endif %}
+</section>
+{% endblock %}
