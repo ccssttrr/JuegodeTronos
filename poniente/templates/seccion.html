@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>Juego de Tronos</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'casas' %}">Casas</a>
+    </nav>
+    <main>
+        {% block contenido %}{% endblock %}
+    </main>
+</body>
+</html>
