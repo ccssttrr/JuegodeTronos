@@ -1,3 +1,34 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+
+from .models import Temporada,Personaje
+
+
+def lista_temporadas(request):
+    temporadas = Temporada.objects.all()
+    return render(request, 'temporada_list.html', {'temporadas': temporadas})
+
+
+def detalle_temporada(request, pk):
+    temporada = get_object_or_404(Temporada, pk=pk)
+    personajes = temporada.personajes.all()
+    return render(request, 'temporada_detail.html', {
+        'temporada': temporada,
+        'personajes': personajes,
+    })
+
+
+def detalle_personaje(request, pk):
+    personaje = get_object_or_404(Personaje, pk=pk)
+    temporadas = personaje.temporadas.all()
+    return render(request, 'personaje_detail.html', {
+        'personaje': personaje,
+        'temporadas': temporadas,
+    })
+
+
+def lista_personajes(request):
+    personajes = Personaje.objects.all()
+    return render(request, 'personaje_list.html', {'personajes': personajes})
+
 
 # Create your views here.

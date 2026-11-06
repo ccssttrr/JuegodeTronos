@@ -1,0 +1,24 @@
+{% extends "seccion.html" %}
+
+{% block title %}Temporada {{ temporada.numero }} · Juego de Tronos{% endblock %}
+
+{% block content %}
+<article>
+    <h2>Temporada {{ temporada.numero }}</h2>
+    <p class="etiqueta">Año de emisión: {{ temporada.anio }}</p>
+    <p>{{ temporada.resumen }}</p>
+
+    <h3>Personajes que aparecen</h3>
+    {% if personajes %}
+        <ul>
+        {% for personaje in personajes %}
+                        <li><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a> ({{ personaje.casa.nombre }})</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hay personajes en esta temporada.</p>
+    {% endif %}
+
+    <p><a href="{% url 'temporada_list' %}">&larr; Volver a temporadas</a></p>
+</article>
+{% endblock %}
