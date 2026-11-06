@@ -12,13 +12,13 @@
     {% if personajes %}
         <ul>
         {% for personaje in personajes %}
-                        <li><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a> ({{ personaje.casa.nombre }})</li>
+            <li><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a> ({{ personaje.casa.nombre }})</li>
         {% endfor %}
         </ul>
     {% else %}
         <p>No hay personajes en esta temporada.</p>
     {% endif %}
 
-    <p><a href="{% url 'temporada_list' %}">&larr; Volver a temporadas</a></p>
+    <p><a href="{% url 'temporada_list' %}">Volver a temporadas</a></p>
 </article>
 {% endblock %}

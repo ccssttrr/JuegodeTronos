@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio · Juego de Tronos{% endblock %}
+
+{% block main %}
+<section class="portada">
+    <h1>Juego de Tronos</h1>
+    <p>Descubre los personajes de la saga, las casas a las que pertenecen y las temporadas en las que aparecen.</p>
+</section>
+
+<section>
+    <h2>Un personaje de cada casa</h2>
+    {% if personajes %}
+        <div class="tarjetas">
+        {% for personaje in personajes %}
+            <article class="tarjeta">
+                <h3><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a></h3>
+                <p class="etiqueta">{{ personaje.casa.nombre }}</p>
+            </article>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>Todavía no hay personajes.</p>
+    {% endif %}
+</section>
+{% endblock %}

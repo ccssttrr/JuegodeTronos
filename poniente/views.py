@@ -1,6 +1,16 @@
 from django.shortcuts import render, get_object_or_404
 
-from .models import Temporada,Personaje
+from .models import Casa, Personaje, Temporada
+
+
+
+def index(request):
+    personajes = []
+    for casa in Casa.objects.all():
+        personaje = casa.personajes.order_by("nombre").first()
+        if personaje:
+            personajes.append(personaje)
+    return render(request, 'index.html', {'personajes': personajes})
 
 
 def lista_temporadas(request):
@@ -17,6 +27,11 @@ def detalle_temporada(request, pk):
     })
 
 
+def lista_personajes(request):
+    personajes = Personaje.objects.all()
+    return render(request, 'personaje_list.html', {'personajes': personajes})
+
+
 def detalle_personaje(request, pk):
     personaje = get_object_or_404(Personaje, pk=pk)
     temporadas = personaje.temporadas.all()
@@ -24,11 +39,3 @@ def detalle_personaje(request, pk):
         'personaje': personaje,
         'temporadas': temporadas,
     })
-
-
-def lista_personajes(request):
-    personajes = Personaje.objects.all()
-    return render(request, 'personaje_list.html', {'personajes': personajes})
-
-
-# Create your views here.
