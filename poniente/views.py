@@ -39,3 +39,18 @@ def detalle_personaje(request, pk):
         'personaje': personaje,
         'temporadas': temporadas,
     })
+    
+    
+
+def lista_casas(request):
+    casas = Casa.objects.all()
+    return render(request, 'casa_list.html', {'casas': casas})
+
+
+def detalle_casa(request, pk):
+    casa = get_object_or_404(Casa, pk=pk)
+    personajes = casa.personajes.all()
+    return render(request, 'casa_detail.html', {
+        'casa': casa,
+        'personajes': personajes,
+    })

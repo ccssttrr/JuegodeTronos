@@ -1,32 +1,32 @@
 {% extends "seccion.html" %}
 
-{% block contenido %}
-<h1>{{ casa.nombre }}</h1>
-<p class="lema">"{{ casa.lema }}"</p>
-<p>Sede: {{ casa.sede }}</p>
-<p>{{ casa.descripcion }}</p>
+{% block title %}Casa {{ casa.nombre }} · Juego de Tronos{% endblock %}
 
-<h2>Personajes de la casa</h2>
-{% if personajes %}
-<table>
-    <thead>
-        <tr>
-            <th>Personaje</th>
-            <th>Temporadas</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for personaje in personajes %}
-        <tr>
-            <td><a href="{% url 'personaje' personaje.pk %}">{{ personaje.nombre }}</a></td>
-            <td>{{ personaje.temporadas.all|length }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% else %}
-<p>Esta casa no tiene personajes.</p>
-{% endif %}
+{% block content %}
+<article>
+    <h2>Casa {{ casa.nombre }}</h2>
+    <p class="lema">"{{ casa.lema }}"</p>
+    <p>Sede: {{ casa.sede }}</p>
+    <p>{{ casa.descripcion }}</p>
 
-<p><a href="{% url 'casas' %}">Volver a las casas</a></p>
+    <h3>Personajes de la casa</h3>
+    {% if personajes %}
+        <table>
+            <tr>
+                <th>Personaje</th>
+                <th>Temporadas</th>
+            </tr>
+            {% for personaje in personajes %}
+            <tr>
+                <td><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a></td>
+                <td>{{ personaje.temporadas.all|length }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Esta casa no tiene personajes.</p>
+    {% endif %}
+
+    <p><a href="{% url 'casa_list' %}">Volver a casas</a></p>
+</article>
 {% endblock %}

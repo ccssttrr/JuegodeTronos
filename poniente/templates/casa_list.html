@@ -1,12 +1,22 @@
 {% extends "seccion.html" %}
 
-{% block contenido %}
-<h1>Casas</h1>
-{% for casa in casas %}
-<article class="tarjeta">
-    <h2><a href="{% url 'casa' casa.pk %}">{{ casa.nombre }}</a></h2>
-    <p class="lema">"{{ casa.lema }}"</p>
-    <p>{{ casa.sede }}</p>
-</article>
-{% endfor %}
+{% block title %}Casas · Juego de Tronos{% endblock %}
+
+{% block content %}
+<section>
+    <h2>Casas</h2>
+    {% if casas %}
+        <div class="tarjetas">
+        {% for casa in casas %}
+            <article class="tarjeta">
+                <h3><a href="{% url 'casa_detail' casa.pk %}">{{ casa.nombre }}</a></h3>
+                <p class="lema">"{{ casa.lema }}"</p>
+                <p>Sede: {{ casa.sede }}</p>
+            </article>
+        {% endfor %}
+        </div>
+    {% else %}
+        <p>Todavía no hay casas.</p>
+    {% endif %}
+</section>
 {% endblock %}
