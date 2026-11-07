@@ -28,16 +28,18 @@ def detalle_temporada(request, pk):
 
 
 def lista_personajes(request):
-    personajes = Personaje.objects.all()
+    personajes = Personaje.objects.order_by('casa__nombre', 'nombre')
     return render(request, 'personaje_list.html', {'personajes': personajes})
 
 
 def detalle_personaje(request, pk):
     personaje = get_object_or_404(Personaje, pk=pk)
     temporadas = personaje.temporadas.all()
+    companeros = personaje.casa.personajes.exclude(pk=personaje.pk) 
     return render(request, 'personaje_detail.html', {
         'personaje': personaje,
         'temporadas': temporadas,
+        'companeros': companeros,
     })
     
     

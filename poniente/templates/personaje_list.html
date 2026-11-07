@@ -4,18 +4,25 @@
 
 {% block content %}
 <section>
-    <h2>Personajes</h2>
+    <h1>Personajes</h1>
     {% if personajes %}
-        <div class="tarjetas">
-        {% for personaje in personajes %}
-            <article class="tarjeta">
-                <h3>{{ personaje.nombre }}</h3>
-                <p class="etiqueta">{{ personaje.casa.nombre }}</p>
-                <p>{{ personaje.descripcion|truncatewords:20 }}</p>
-                <a href="{% url 'personaje_detail' personaje.pk %}">Ver ficha</a>
-            </article>
+    <p>Hay {{ personajes|length }} personajes repartidos entre las grandes casas de Poniente.</p>
+        
+    {% regroup personajes by casa as grupos %}
+        {% for grupo in grupos %}
+        <section class="grupo-casa">
+        <h2><a href="{% url 'casa_detail' grupo.grouper.pk %}">Casa {{ grupo.grouper.nombre }}</a></h2>
+            <div class="tarjetas">
+            {% for personaje in grupo.list %}
+                <article class="tarjeta">
+                    <h3><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a></h3>
+                    <p>{{ personaje.descripcion|truncatewords:20 }}</p>
+                    <p class="etiqueta">{{ personaje.temporadas.count }} temporada{{ personaje.temporadas.count|pluralize }}</p>
+                </article>
+            {% endfor %}
+            </div>
+        </section>
         {% endfor %}
-        </div>
     {% else %}
         <p>Todavía no hay personajes.</p>
     {% endif %}
