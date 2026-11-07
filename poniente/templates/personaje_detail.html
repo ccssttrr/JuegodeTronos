@@ -4,24 +4,48 @@
 
 {% block content %}
 <article>
-    <h2>{{ personaje.nombre }}</h2>
+    <h1>{{ personaje.nombre }}</h1>
+    <p class="etiqueta"><a href="{% url 'casa_detail' personaje.casa.pk %}">Casa {{ personaje.casa.nombre }}</a></p>
     <p>{{ personaje.descripcion }}</p>
+    
+    <section>
+        <h2>Casa</h2>
+        <p><a href="{% url 'casa_detail' personaje.casa.pk %}">{{ personaje.casa.nombre }}</a></p>
+        <p class="lema">"{{ personaje.casa.lema }}"</p>
+        <p>Sede: {{ personaje.casa.sede }}</p>
+    </section>
+    
+    <section>
+        <h2>Aparece en</h2>
+            {% if temporadas %}
+                <ul>
+                {% for temporada in temporadas %}
+                    <li>
+                        <a href="{% url 'temporada_detail' temporada.pk %}">Temporada {{ temporada.numero }}</a>
+                        <span class="etiqueta">{{ temporada.anio }}</span>
+                    </li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No aparece en ninguna temporada.</p>
+        {% endif %}
+    </section>
 
-    <h3>Casa</h3>
-    <p><a href="{% url 'casa_detail' personaje.casa.pk %}">{{ personaje.casa.nombre }}</a></p>
+    <section>
+        <h2>Otros personajes de la casa {{ personaje.casa.nombre }}</h2>
+            {% if companeros %}
+                <ul>
+                {% for companero in companeros %}
+                    <li><a href="{% url 'personaje_detail' companero.pk %}">{{ companero.nombre }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+            <p>No hay más personajes de esta casa.</p>
+        {% endif %}
+    </section>
 
-    <h3>Aparece en</h3>
-    {% if temporadas %}
-        <ul>
-        {% for temporada in temporadas %}
-            <li>
-                <a href="{% url 'temporada_detail' temporada.pk %}">Temporada {{ temporada.numero }}</a>
-                <span class="etiqueta">{{ temporada.anio }}</span>
-            </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>No aparece en ninguna temporada.</p>
-    {% endif %}
+
+
+    <p><a href="{% url 'personaje_list' %}">Volver a personajes</a></p>
 </article>
 {% endblock %}
