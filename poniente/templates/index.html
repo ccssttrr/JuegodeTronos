@@ -15,7 +15,7 @@
         {% for personaje in personajes %}
             <article class="tarjeta">
                 <h3><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a></h3>
-                <p class="etiqueta">{{ personaje.casa.nombre }}</p>
+                <p class="etiqueta"><a href="{% url 'casa_detail' personaje.casa.pk %}">{{ personaje.casa.nombre }}</a></p>
             </article>
         {% endfor %}
         </div>
