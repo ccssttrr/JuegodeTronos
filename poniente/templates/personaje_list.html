@@ -6,7 +6,7 @@
 <section>
     <h1>Personajes</h1>
     {% if personajes %}
-    <p>Hay {{ personajes|length }} personajes repartidos entre las grandes casas de Poniente.</p>
+    <p>Hay {{ personajes|length }} personaje{{ personajes|length|pluralize }} repartido{{ personajes|length|pluralize }} entre las grandes casas de Poniente.</p>
         
     {% regroup personajes by casa as grupos %}
         {% for grupo in grupos %}
@@ -17,7 +17,7 @@
                 <article class="tarjeta">
                     <h3><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a></h3>
                     <p>{{ personaje.descripcion|truncatewords:20 }}</p>
-                    <p class="etiqueta">{{ personaje.temporadas.count }} temporada{{ personaje.temporadas.count|pluralize }}</p>
+                    <p class="etiqueta">{{ personaje.temporadas.all|length }} temporada{{ personaje.temporadas.all|length|pluralize }}</p>
                 </article>
             {% endfor %}
             </div>

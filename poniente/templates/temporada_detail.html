@@ -4,11 +4,11 @@
 
 {% block content %}
 <article>
-    <h2>Temporada {{ temporada.numero }}</h2>
+    <h1>Temporada {{ temporada.numero }}</h1>
     <p class="etiqueta">Año de emisión: {{ temporada.anio }}</p>
     <p>{{ temporada.resumen }}</p>
 
-    <h3>Personajes que aparecen</h3>
+    <h2>Personajes que aparecen</h2>
     {% if personajes %}
         <ul>
         {% for personaje in personajes %}
