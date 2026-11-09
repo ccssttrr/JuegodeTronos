@@ -179,3 +179,9 @@ footer {
         grid-template-columns: 1fr 1fr 1fr;
     }
 }
+
+.tarjeta h2 {
+    margin-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}

@@ -9,7 +9,7 @@
         <div class="tarjetas">
         {% for casa in casas %}
             <article class="tarjeta">
-                <h3><a href="{% url 'casa_detail' casa.pk %}">{{ casa.nombre }}</a></h3>
+                <h2><a href="{% url 'casa_detail' casa.pk %}">{{ casa.nombre }}</a></h2>
                 <p class="lema">"{{ casa.lema }}"</p>
                 <p>Sede: {{ casa.sede }}</p>
             </article>
