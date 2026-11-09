@@ -19,7 +19,7 @@ def lista_temporadas(request):
 
 def detalle_temporada(request, pk):
     temporada = get_object_or_404(Temporada, pk=pk)
-    personajes = temporada.personajes.select_related('casa')
+    personajes = temporada.personajes.all()
     return render(request, 'temporada_detail.html', {
         'temporada': temporada,
         'personajes': personajes,
@@ -27,14 +27,21 @@ def detalle_temporada(request, pk):
 
 
 def lista_personajes(request):
-    personajes = Personaje.objects.select_related('casa').prefetch_related('temporadas').order_by('casa__nombre', 'nombre')
-    return render(request, 'personaje_list.html', {'personajes': personajes})
+    casas = Casa.objects.all()
+    num_personajes = Personaje.objects.count()
+    return render(request, 'personaje_list.html', {
+        'casas': casas,
+        'num_personajes': num_personajes,
+    })
 
 
 def detalle_personaje(request, pk):
     personaje = get_object_or_404(Personaje, pk=pk)
     temporadas = personaje.temporadas.all()
-    companeros = personaje.casa.personajes.exclude(pk=personaje.pk)
+    companeros = []
+    for otro in personaje.casa.personajes.all():
+        if otro.pk != personaje.pk:
+            companeros.append(otro)
     return render(request, 'personaje_detail.html', {
         'personaje': personaje,
         'temporadas': temporadas,
@@ -49,7 +56,7 @@ def lista_casas(request):
 
 def detalle_casa(request, pk):
     casa = get_object_or_404(Casa, pk=pk)
-    personajes = casa.personajes.prefetch_related('temporadas')
+    personajes = casa.personajes.all()
     return render(request, 'casa_detail.html', {
         'casa': casa,
         'personajes': personajes,
