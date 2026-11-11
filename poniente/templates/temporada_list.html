@@ -6,14 +6,22 @@
 <section>
     <h1>Temporadas</h1>
     {% if temporadas %}
-        <ul>
+        <div class="tarjetas">
         {% for temporada in temporadas %}
-            <li>
-                <a href="{% url 'temporada_detail' temporada.pk %}">Temporada {{ temporada.numero }}</a>
-                <span class="etiqueta">{{ temporada.anio }}</span>
-            </li>
+            <article class="tarjeta">
+                <a href="{% url 'temporada_detail' temporada.pk %}">
+                    {% if temporada.imagen %}
+                        <img src="{{ temporada.imagen.url }}" alt="Imagen de la temporada {{ temporada.numero }}">
+                    {% else %}
+                        <span class="sin-imagen">Temporada {{ temporada.numero }}</span>
+                    {% endif %}
+                </a>
+                <h2><a href="{% url 'temporada_detail' temporada.pk %}">Temporada {{ temporada.numero }}</a></h2>
+                <p class="etiqueta">{{ temporada.anio }}</p>
+                <p class="etiqueta">Personajes: {{ temporada.personajes.all|length }}</p>
+            </article>
         {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p>Todavía no hay temporadas.</p>
     {% endif %}

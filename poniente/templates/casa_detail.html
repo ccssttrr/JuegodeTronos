@@ -4,20 +4,39 @@
 
 {% block content %}
 <article>
-    <h1>Casa {{ casa.nombre }}</h1>
-    <p class="lema">"{{ casa.lema }}"</p>
-    <p>Sede: {{ casa.sede }}</p>
-    <p>{{ casa.descripcion }}</p>
+    <div class="ficha">
+        <div class="ficha-imagen">
+            {% if casa.imagen %}
+                <img src="{{ casa.imagen.url }}" alt="Emblema de la casa {{ casa.nombre }}">
+            {% else %}
+                <span class="sin-imagen">Casa {{ casa.nombre }}</span>
+            {% endif %}
+        </div>
+        <div class="ficha-texto">
+            <h1>Casa {{ casa.nombre }}</h1>
+            <p class="lema">"{{ casa.lema }}"</p>
+            <p><strong>Sede:</strong> {{ casa.sede }}</p>
+            <p>{{ casa.descripcion }}</p>
+        </div>
+    </div>
 
     <h2>Personajes de la casa</h2>
     {% if personajes %}
         <table>
             <tr>
+                <th>Imagen</th>
                 <th>Personaje</th>
                 <th>Temporadas</th>
             </tr>
             {% for personaje in personajes %}
             <tr>
+                <td>
+                    {% if personaje.imagen %}
+                        <img class="miniatura" src="{{ personaje.imagen.url }}" alt="Imagen de {{ personaje.nombre }}">
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
                 <td><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a></td>
                 <td>{{ personaje.temporadas.all|length }}</td>
             </tr>

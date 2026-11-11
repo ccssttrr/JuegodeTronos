@@ -6,6 +6,10 @@
 <section class="portada">
     <h1>Juego de Tronos</h1>
     <p>Descubre los personajes de la saga, las casas a las que pertenecen y las temporadas en las que aparecen.</p>
+    <p>
+        <a class="boton" href="{% url 'personaje_list' %}">Ver personajes</a>
+        <a class="boton" href="{% url 'casa_list' %}">Ver casas</a>
+    </p>
 </section>
 
 <section>
@@ -14,8 +18,15 @@
         <div class="tarjetas">
         {% for personaje in personajes %}
             <article class="tarjeta">
+                <a href="{% url 'personaje_detail' personaje.pk %}">
+                    {% if personaje.imagen %}
+                        <img src="{{ personaje.imagen.url }}" alt="Imagen de {{ personaje.nombre }}">
+                    {% else %}
+                        <span class="sin-imagen">{{ personaje.nombre }}</span>
+                    {% endif %}
+                </a>
                 <h3><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a></h3>
-                <p class="etiqueta"><a href="{% url 'casa_detail' personaje.casa.pk %}">{{ personaje.casa.nombre }}</a></p>
+                <p class="etiqueta"><a href="{% url 'casa_detail' personaje.casa.pk %}">Casa {{ personaje.casa.nombre }}</a></p>
             </article>
         {% endfor %}
         </div>

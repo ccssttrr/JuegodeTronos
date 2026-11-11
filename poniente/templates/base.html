@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <p class="logo">Juego de Tronos</p>
+        <p class="logo"><a href="{% url 'index' %}">Juego de Tronos</a></p>
         <nav>
             <a href="{% url 'index' %}">Inicio</a>
             <a href="{% url 'personaje_list' %}">Personajes</a>
@@ -23,8 +23,28 @@
         {% endblock %}
     </main>
 
-    <footer>
-        <p>Proyecto de Ingeniería Web - Universidad de Deusto</p>
+       <footer>
+        <div class="pie">
+            <div class="pie-columna">
+                <p class="pie-titulo">Juego de Tronos</p>
+                <p>Web sobre los personajes, las casas y las temporadas de la serie.</p>
+            </div>
+            <div class="pie-columna">
+                <p class="pie-titulo">Secciones</p>
+                <ul>
+                    <li><a href="{% url 'index' %}">Inicio</a></li>
+                    <li><a href="{% url 'personaje_list' %}">Personajes</a></li>
+                    <li><a href="{% url 'casa_list' %}">Casas</a></li>
+                    <li><a href="{% url 'temporada_list' %}">Temporadas</a></li>
+                </ul>
+            </div>
+            <div class="pie-columna">
+                <p class="pie-titulo">Proyecto</p>
+                <p>Ingeniería Web - Universidad de Deusto</p>
+                <p>Curso 2026-2027</p>
+            </div>
+        </div>
+        <p class="pie-final">Proyecto académico sin ánimo de lucro. Juego de Tronos pertenece a sus autores.</p>
     </footer>
 </body>
 </html>

@@ -4,40 +4,55 @@
 
 {% block content %}
 <article>
-    <h1>{{ personaje.nombre }}</h1>
-    <p class="etiqueta"><a href="{% url 'casa_detail' personaje.casa.pk %}">Casa {{ personaje.casa.nombre }}</a></p>
-    <p>{{ personaje.descripcion }}</p>
-    
+    <div class="ficha">
+        <div class="ficha-imagen">
+            {% if personaje.imagen %}
+                <img src="{{ personaje.imagen.url }}" alt="Imagen de {{ personaje.nombre }}">
+            {% else %}
+                <span class="sin-imagen">{{ personaje.nombre }}</span>
+            {% endif %}
+        </div>
+        <div class="ficha-texto">
+            <h1>{{ personaje.nombre }}</h1>
+            <p class="etiqueta"><a href="{% url 'casa_detail' personaje.casa.pk %}">Casa {{ personaje.casa.nombre }}</a></p>
+            <p>{{ personaje.descripcion }}</p>
+        </div>
+    </div>
+
     <section>
         <h2>Aparece en</h2>
-            {% if temporadas %}
-                <ul>
-                {% for temporada in temporadas %}
-                    <li>
-                        <a href="{% url 'temporada_detail' temporada.pk %}">Temporada {{ temporada.numero }}</a>
-                        <span class="etiqueta">{{ temporada.anio }}</span>
-                    </li>
-                {% endfor %}
-                </ul>
-            {% else %}
-                <p>No aparece en ninguna temporada.</p>
+        {% if temporadas %}
+            <div class="etiquetas">
+            {% for temporada in temporadas %}
+                <a class="etiqueta" href="{% url 'temporada_detail' temporada.pk %}">Temporada {{ temporada.numero }} ({{ temporada.anio }})</a>
+            {% endfor %}
+            </div>
+        {% else %}
+            <p>No aparece en ninguna temporada.</p>
         {% endif %}
     </section>
 
     <section>
         <h2>Otros personajes de la casa {{ personaje.casa.nombre }}</h2>
-            {% if companeros %}
-                <ul>
-                {% for companero in companeros %}
-                    <li><a href="{% url 'personaje_detail' companero.pk %}">{{ companero.nombre }}</a></li>
-                {% endfor %}
-                </ul>
-            {% else %}
+        {% if companeros %}
+            <div class="tarjetas pequenas">
+            {% for companero in companeros %}
+                <article class="tarjeta">
+                    <a href="{% url 'personaje_detail' companero.pk %}">
+                        {% if companero.imagen %}
+                            <img src="{{ companero.imagen.url }}" alt="Imagen de {{ companero.nombre }}">
+                        {% else %}
+                            <span class="sin-imagen">{{ companero.nombre }}</span>
+                        {% endif %}
+                    </a>
+                    <h3><a href="{% url 'personaje_detail' companero.pk %}">{{ companero.nombre }}</a></h3>
+                </article>
+            {% endfor %}
+            </div>
+        {% else %}
             <p>No hay más personajes de esta casa.</p>
         {% endif %}
     </section>
-
-
 
     <p><a href="{% url 'personaje_list' %}">Volver a personajes</a></p>
 </article>

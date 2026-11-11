@@ -6,6 +6,8 @@ class Casa(models.Model):
     lema = models.CharField(max_length=100)
     sede = models.CharField(max_length=50)
     descripcion = models.TextField()
+    # null=True, blank=True -> la imagen es opcional
+    imagen = models.ImageField(upload_to="imgs/casas/", null=True, blank=True)
 
     class Meta:
         ordering = ["nombre"]
@@ -18,6 +20,7 @@ class Temporada(models.Model):
     numero = models.IntegerField()
     anio = models.IntegerField()
     resumen = models.TextField()
+    imagen = models.ImageField(upload_to="imgs/temporadas/", null=True, blank=True)
 
     class Meta:
         ordering = ["numero"]
@@ -33,6 +36,7 @@ class Personaje(models.Model):
     casa = models.ForeignKey(Casa, on_delete=models.CASCADE, related_name="personajes")
     # N:M -> un personaje aparece en varias temporadas
     temporadas = models.ManyToManyField(Temporada, related_name="personajes")
+    imagen = models.ImageField(upload_to="imgs/personajes/", null=True, blank=True)
 
     class Meta:
         ordering = ["nombre"]

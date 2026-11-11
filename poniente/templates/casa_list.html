@@ -9,9 +9,17 @@
         <div class="tarjetas">
         {% for casa in casas %}
             <article class="tarjeta">
-                <h2><a href="{% url 'casa_detail' casa.pk %}">{{ casa.nombre }}</a></h2>
+                <a href="{% url 'casa_detail' casa.pk %}">
+                    {% if casa.imagen %}
+                        <img src="{{ casa.imagen.url }}" alt="Emblema de la casa {{ casa.nombre }}">
+                    {% else %}
+                        <span class="sin-imagen">Casa {{ casa.nombre }}</span>
+                    {% endif %}
+                </a>
+                <h2><a href="{% url 'casa_detail' casa.pk %}">Casa {{ casa.nombre }}</a></h2>
                 <p class="lema">"{{ casa.lema }}"</p>
                 <p>Sede: {{ casa.sede }}</p>
+                <p class="etiqueta">Personajes: {{ casa.personajes.all|length }}</p>
             </article>
         {% endfor %}
         </div>

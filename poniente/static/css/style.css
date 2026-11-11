@@ -1,15 +1,14 @@
+
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
     margin: 0;
-    font-family: Arial, sans-serif;
-    line-height: 1.5;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
     color: #1f2d3a;
     background-color: #f4f8fb;
 }
 
 h1, h2, h3 {
+    font-family: Georgia, "Times New Roman", serif;
     color: #24405e;
 }
 
@@ -28,13 +27,13 @@ a:hover {
     text-decoration: underline;
 }
 
-main {
-    flex: 1;
-    width: 100%;
-    box-sizing: border-box;
-    padding: 15px;
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
 
+/* ---------- Cabecera y menú (Flexbox) ---------- */
 header {
     display: flex;
     flex-direction: column;
@@ -42,96 +41,206 @@ header {
     padding: 15px;
     background-color: #3a5a78;
     border-bottom: 4px solid #7fb3d5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .logo {
     margin: 0 0 10px 0;
-    font-size: 24px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 26px;
     font-weight: bold;
+}
+
+.logo a {
     color: #ffffff;
+}
+
+.logo a:hover {
+    color: #dce9f3;
 }
 
 nav {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 8px;
 }
 
 nav a {
-    padding: 5px 10px;
+    padding: 6px 14px;
     color: #ffffff;
-    border-radius: 4px;
+    border: 1px solid #7fb3d5;
+    border-radius: 20px;
 }
 
 nav a:hover {
-    background-color: #7fb3d5;
     color: #1f2d3a;
+    background-color: #7fb3d5;
     text-decoration: none;
 }
 
+/* ---------- Contenido principal ---------- */
+main {
+    padding: 15px;
+}
+
+/* Portada de la página de inicio */
 .portada {
-    padding: 40px 15px;
+    padding: 50px 20px;
     text-align: center;
+    color: #1f2d3a;
     background-color: #dce9f3;
     border: 1px solid #b7d3e6;
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .portada h1 {
     margin-top: 0;
-    font-size: 36px;
+    font-size: 38px;
+    color: #24405e;
 }
 
+.boton {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #3a5a78;
+    border-radius: 6px;
+}
+
+.boton:hover {
+    color: #ffffff;
+    background-color: #24405e;
+    text-decoration: none;
+}
+
+/* Caja blanca de las páginas de sección */
+.seccion {
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #d3e0ea;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.seccion h1 {
+    margin-top: 0;
+    font-size: 32px;
+}
+
+/* ---------- Rejilla de tarjetas (Grid) ---------- */
 .tarjetas {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 15px;
+    gap: 20px;
+}
+
+/* Tarjetas pequeñas (personajes dentro de un detalle): 2 columnas ya en móvil */
+.pequenas {
+    grid-template-columns: 1fr 1fr;
 }
 
 .tarjeta {
-    padding: 15px;
+    padding: 12px;
     background-color: #ffffff;
     border: 1px solid #d3e0ea;
     border-top: 4px solid #7fb3d5;
-    border-radius: 8px;
+    border-radius: 10px;
 }
 
 .tarjeta:hover {
     border-color: #3a5a78;
-    box-shadow: 0 2px 8px #b7d3e6;
+    box-shadow: 0 4px 12px #b7d3e6;
 }
 
+.tarjeta img {
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 6px;
+}
+
+.tarjeta h2,
 .tarjeta h3 {
+    margin: 0 0 5px 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.tarjeta p {
+    margin: 5px 0;
+}
+
+/* Recuadro que sale cuando todavía no se ha subido la imagen */
+.sin-imagen {
+    display: block;
+    margin-bottom: 10px;
+    padding: 50px 10px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    text-align: center;
+    color: #ffffff;
+    background-color: #3a5a78;
+    border-radius: 6px;
+}
+
+/* ---------- Ficha de detalle (imagen + texto con Flexbox) ---------- */
+.ficha {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ficha-imagen img {
+    width: 100%;
+    border: 3px solid #7fb3d5;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.ficha-texto h1 {
     margin-top: 0;
+}
+
+/* ---------- Etiquetas ---------- */
+.etiquetas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .etiqueta {
     display: inline-block;
-    padding: 2px 10px;
+    margin-right: 5px;
+    padding: 3px 12px;
     font-size: 14px;
     color: #1f2d3a;
     background-color: #dce9f3;
     border: 1px solid #7fb3d5;
-    border-radius: 10px;
+    border-radius: 15px;
 }
 
 .etiqueta a {
     color: #1f2d3a;
 }
 
+a.etiqueta:hover {
+    color: #ffffff;
+    background-color: #3a5a78;
+    border-color: #3a5a78;
+    text-decoration: none;
+}
+
 .lema {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
     font-style: italic;
     color: #5a6b7a;
 }
 
-
-
-.seccion li {
-    padding: 8px 0;
-    border-bottom: 1px solid #d3e0ea;
-}
-
+/* ---------- Tabla ---------- */
 table {
     width: 100%;
     background-color: #ffffff;
@@ -152,42 +261,124 @@ tr:hover td {
     background-color: #eaf2f8;
 }
 
-footer {
-    margin-top: 30px;
-    padding: 15px;
-    text-align: center;
-    color: #ffffff;
-    background-color: #24405e;
+.miniatura {
+    width: 50px;
+    border-radius: 6px;
 }
 
-@media (min-width: 600px) {
+/* ---------- Pie ---------- */
+/* ---------- Pie (Flexbox) ---------- */
+footer {
+    margin-top: 30px;
+    padding: 20px 15px 10px 15px;
+    color: #ffffff;
+    background-color: #24405e;
+    border-top: 4px solid #7fb3d5;
+}
+
+.pie {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.pie-titulo {
+    margin-bottom: 5px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    font-weight: bold;
+    color: #7fb3d5;
+}
+
+.pie-columna p {
+    margin-top: 0;
+}
+
+.pie-columna ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+footer a {
+    color: #ffffff;
+}
+
+footer a:hover {
+    color: #7fb3d5;
+}
+
+.pie-final {
+    margin-bottom: 0;
+    padding-top: 10px;
+    font-size: 14px;
+    text-align: center;
+    color: #dce9f3;
+    border-top: 1px solid #3a5a78;
+}
+
+/* =========================================================
+   Tablet (a partir de 600px)
+   ========================================================= */
+@media only screen and (min-width: 600px) {
     header {
         flex-direction: row;
         justify-content: space-between;
+        padding: 15px 30px;
     }
 
     .logo {
         margin: 0;
     }
 
+    .portada h1 {
+        font-size: 52px;
+    }
+
     .tarjetas {
         grid-template-columns: 1fr 1fr;
     }
+
+    .pequenas {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    /* En pantallas grandes la imagen va a la izquierda y el texto a la derecha */
+    .ficha {
+        flex-direction: row;
+    }
+     .pie {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .ficha-imagen {
+        width: 35%;
+    }
+
+    .ficha-texto {
+        width: 60%;
+    }
 }
 
-@media (min-width: 900px) {
+/* =========================================================
+   Escritorio (a partir de 900px)
+   ========================================================= */
+@media only screen and (min-width: 900px) {
     main {
-        max-width: 1000px;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+    
+    .pie {
+        max-width: 1100px;
         margin: 0 auto;
     }
 
     .tarjetas {
         grid-template-columns: 1fr 1fr 1fr;
     }
-}
 
-.tarjeta h2 {
-    margin-top: 0;
-    padding-bottom: 0;
-    border-bottom: none;
+    .pequenas {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 }

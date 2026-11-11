@@ -4,17 +4,38 @@
 
 {% block content %}
 <article>
-    <h1>Temporada {{ temporada.numero }}</h1>
-    <p class="etiqueta">Año de emisión: {{ temporada.anio }}</p>
-    <p>{{ temporada.resumen }}</p>
+    <div class="ficha">
+        <div class="ficha-imagen">
+            {% if temporada.imagen %}
+                <img src="{{ temporada.imagen.url }}" alt="Imagen de la temporada {{ temporada.numero }}">
+            {% else %}
+                <span class="sin-imagen">Temporada {{ temporada.numero }}</span>
+            {% endif %}
+        </div>
+        <div class="ficha-texto">
+            <h1>Temporada {{ temporada.numero }}</h1>
+            <p class="etiqueta">Año de emisión: {{ temporada.anio }}</p>
+            <p>{{ temporada.resumen }}</p>
+        </div>
+    </div>
 
     <h2>Personajes que aparecen</h2>
     {% if personajes %}
-        <ul>
+        <div class="tarjetas pequenas">
         {% for personaje in personajes %}
-            <li><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a> ({{ personaje.casa.nombre }})</li>
+            <article class="tarjeta">
+                <a href="{% url 'personaje_detail' personaje.pk %}">
+                    {% if personaje.imagen %}
+                        <img src="{{ personaje.imagen.url }}" alt="Imagen de {{ personaje.nombre }}">
+                    {% else %}
+                        <span class="sin-imagen">{{ personaje.nombre }}</span>
+                    {% endif %}
+                </a>
+                <h3><a href="{% url 'personaje_detail' personaje.pk %}">{{ personaje.nombre }}</a></h3>
+                <p class="etiqueta">Casa {{ personaje.casa.nombre }}</p>
+            </article>
         {% endfor %}
-        </ul>
+        </div>
     {% else %}
         <p>No hay personajes en esta temporada.</p>
     {% endif %}
